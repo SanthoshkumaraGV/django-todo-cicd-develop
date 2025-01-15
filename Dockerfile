@@ -13,8 +13,6 @@ COPY requirements.txt  /app/
 # run this command to install all dependencies 
 RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install django==3.2
-
 COPY . .
 
 RUN python manage.py migrate
