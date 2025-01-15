@@ -23,10 +23,11 @@ COPY requirements.txt  /data/
 RUN pip install --no-cache-dir -r requirements.txt
  
 # Copy the Django project to the container
-COPY . /data/
- 
-# Expose the Django port
+
+COPY . .
+
+RUN python manage.py migrate
+
 EXPOSE 8000
- 
-# Run Django’s development server
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+CMD ["python","manage.py","runserver","0.0.0.0:8000"]
