@@ -1,31 +1,21 @@
-FROM python:3  
- 
-# Create the app directory
-RUN mkdir /app
- 
-# Set the working directory inside the container
+# Use an official Python runtime as a parent image
+FROM python:3.9-slim
+
+# Set the working directory in the container
 WORKDIR /app
- 
-# Set environment variables 
-# Prevents Python from writing pyc files to disk
-ENV PYTHONDONTWRITEBYTECODE=1
-#Prevents Python from buffering stdout and stderr
-ENV PYTHONUNBUFFERED=1 
- 
-# Upgrade pip
-RUN pip install --upgrade pip 
- 
-# Copy the Django project  and install dependencies
-COPY requirements.txt  /app/
- 
-# run this command to install all dependencies 
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+# You can create a requirements.txt file with Django inside
 RUN pip install --no-cache-dir -r requirements.txt
- 
-# Copy the Django project to the container
-COPY . /app/
- 
-# Expose the Django port
+
+# Expose the port the app runs on
 EXPOSE 8000
- 
-# Run Django’s development server
+
+# Define environment variable
+ENV PYTHONUNBUFFERED 1
+
+# Run Django's development server on container start
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
