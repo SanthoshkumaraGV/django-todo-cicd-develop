@@ -2,6 +2,8 @@ FROM python:3
 
 WORKDIR /data
 
+sudo apt install python3-pip
+
 RUN pip install django==3.2
 
 COPY . .
