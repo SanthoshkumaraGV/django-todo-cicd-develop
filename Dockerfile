@@ -2,10 +2,10 @@
 FROM python:3.13  
  
 # Create the app directory
-RUN mkdir /app
+RUN mkdir /data
  
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /data
  
 # Set environment variables 
 # Prevents Python from writing pyc files to disk
@@ -17,13 +17,13 @@ ENV PYTHONUNBUFFERED=1
 RUN pip install --upgrade pip 
  
 # Copy the Django project  and install dependencies
-COPY requirements.txt  /app/
+COPY requirements.txt  /data/
  
 # run this command to install all dependencies 
 RUN pip install --no-cache-dir -r requirements.txt
  
 # Copy the Django project to the container
-COPY . /app/
+COPY . /data/
  
 # Expose the Django port
 EXPOSE 8000
