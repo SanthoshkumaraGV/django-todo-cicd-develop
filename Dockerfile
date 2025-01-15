@@ -1,8 +1,5 @@
 # Use the official Python runtime image
-FROM python:3.13  
- 
-# Create the app directory
-RUN mkdir /data
+FROM python:3
  
 # Set the working directory inside the container
 WORKDIR /data
