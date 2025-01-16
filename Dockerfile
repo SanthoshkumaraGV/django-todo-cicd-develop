@@ -1,21 +1,14 @@
-# Use an official Python runtime as a parent image
-FROM python:3.9-slim
+FROM python:3
 
-# Set the working directory in the container
-WORKDIR /app
+WORKDIR /data
 
-# Copy the current directory contents into the container at /app
-COPY . /app
+RUN pip install django==3.2
 
-# Install any needed packages specified in requirements.txt
-# You can create a requirements.txt file with Django inside
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
 
-# Expose the port the app runs on
+RUN python manage.py migrate
+
 EXPOSE 8000
 
-# Define environment variable
-ENV PYTHONUNBUFFERED 1
+CMD ["python","manage.py","runserver","0.0.0.0:8000"]
 
-# Run Django's development server on container start
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
