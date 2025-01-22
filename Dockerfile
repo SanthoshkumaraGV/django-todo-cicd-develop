@@ -5,7 +5,7 @@ WORKDIR /data
 RUN pip install django==3.2
 RUN pip install setuptools
 
-COPY . .
+COPY . /data
 
 RUN python manage.py migrate
 
