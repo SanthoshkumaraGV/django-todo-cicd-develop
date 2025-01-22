@@ -7,7 +7,7 @@ RUN pip install setuptools
 
 COPY . /data
 
-RUN python3 manage.py migrate
+#RUN python3 manage.py migrate
 
 EXPOSE 8000
 ENTRYPOINT [PYTHON]
